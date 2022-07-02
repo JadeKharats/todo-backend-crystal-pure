@@ -1,5 +1,6 @@
 require "json"
 require "uuid"
+
 # TODO: Write documentation for `Todo`
 module Todo
   VERSION = "0.1.0"
@@ -10,7 +11,8 @@ module Todo
     property title : String
     property order : Int32
     property completed : Bool
-    def initialize(@_id,@title,@order,@completed)
+
+    def initialize(@_id, @title, @order, @completed)
     end
   end
 
@@ -51,6 +53,7 @@ module Todo
 
   class Handler
     property repo : Repository
+
     def initialize(@repo)
     end
 
