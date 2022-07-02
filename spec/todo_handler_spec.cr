@@ -26,4 +26,15 @@ describe Todo::Handler do
       handler.repo.size.should eq 1
     end
   end
+
+  describe "list item" do
+    it "return all items" do
+      handler = Todo::Handler.new(Todo::Repository.new)
+      handler.add_todo_item("Add some handler test")
+      handler.add_todo_item("Add more handler test")
+      list = handler.list_todos
+      list.size.should eq 2
+      list.first.title.should eq "Add some handler test"
+    end
+  end
 end

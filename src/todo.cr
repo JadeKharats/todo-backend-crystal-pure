@@ -78,5 +78,9 @@ module Todo
     def add_todo_item(title : String)
       add_todo_item title, nil
     end
+
+    def list_todos
+      @repo.get_all
+    end
   end
 end
