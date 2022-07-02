@@ -94,5 +94,17 @@ module Todo
     def get_todo(item_id : String)
       @repo.get_todo(item_id)
     end
+
+    def update_item(item_id : String, title : String, completed : Bool, order : Int32)
+      item = @repo.get_todo(item_id)
+      item.title = title
+      item.completed = completed
+      item.order = order
+      @repo.save item
+    end
+
+    def update_item(item_id : String, title : String, completed : Bool, order : Int64)
+      update_item(item_id, title, completed, order.to_i32)
+    end
   end
 end
