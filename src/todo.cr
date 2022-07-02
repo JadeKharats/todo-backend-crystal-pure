@@ -82,5 +82,9 @@ module Todo
     def list_todos
       @repo.get_all
     end
+
+    def clear_todos
+      @repo.clear
+    end
   end
 end
