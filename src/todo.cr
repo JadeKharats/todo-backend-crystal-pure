@@ -1,8 +1,8 @@
 require "json"
+
 # TODO: Write documentation for `Todo`
 module Todo
   VERSION = "0.1.0"
-
 
   class Item
     include JSON::Serializable
@@ -14,7 +14,7 @@ module Todo
 
   class Repository
     def initialize
-      @todo_list = Hash(String,Item).new
+      @todo_list = Hash(String, Item).new
     end
 
     def save(item : Item)
@@ -45,6 +45,5 @@ module Todo
     def clear
       @todo_list.clear
     end
-
   end
 end
