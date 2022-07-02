@@ -1,5 +1,5 @@
 require "json"
-
+require "uuid"
 # TODO: Write documentation for `Todo`
 module Todo
   VERSION = "0.1.0"
@@ -10,6 +10,8 @@ module Todo
     property title : String
     property order : Int32
     property completed : Bool
+    def initialize(@_id,@title,@order,@completed)
+    end
   end
 
   class Repository
@@ -44,6 +46,34 @@ module Todo
 
     def clear
       @todo_list.clear
+    end
+  end
+
+  class Handler
+    property repo : Repository
+    def initialize(@repo)
+    end
+
+    def add_todo_item(title : String, order : Int32)
+      item = Item.new(
+        UUID.random.to_s,
+        title,
+        order,
+        false
+      )
+      @repo.save(item)
+    end
+
+    def add_todo_item(title : String, order : Int64)
+      add_todo_item title, order.to_i32
+    end
+
+    def add_todo_item(title : String, order : Nil)
+      add_todo_item title, (@repo.size + 1)
+    end
+
+    def add_todo_item(title : String)
+      add_todo_item title, nil
     end
   end
 end
