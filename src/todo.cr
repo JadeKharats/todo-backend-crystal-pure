@@ -86,5 +86,13 @@ module Todo
     def clear_todos
       @repo.clear
     end
+
+    def remove_item(item_id : String)
+      @repo.delete(item_id)
+    end
+
+    def get_todo(item_id : String)
+      @repo.get_todo(item_id)
+    end
   end
 end

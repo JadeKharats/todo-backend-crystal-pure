@@ -48,4 +48,27 @@ describe Todo::Handler do
       handler.repo.size.should eq 0
     end
   end
+
+  describe "remove items" do
+    it "remove item from id" do
+      handler = Todo::Handler.new(Todo::Repository.new)
+      item = handler.add_todo_item("Add some handler test")
+      handler.add_todo_item("Add more handler test")
+      handler.repo.size.should eq 2
+      handler.remove_item(item._id)
+      handler.repo.size.should eq 1
+      handler.list_todos.first.title.should eq "Add more handler test"
+    end
+  end
+
+  describe "get todo" do
+    it "return item with ID" do
+      handler = Todo::Handler.new(Todo::Repository.new)
+      item = handler.add_todo_item("Add some handler test")
+      handler.add_todo_item("Add more handler test")
+      handler.repo.size.should eq 2
+      repo_item = handler.get_todo(item._id)
+      repo_item.title.should eq "Add some handler test"
+    end
+  end
 end
