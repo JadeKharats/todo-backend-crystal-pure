@@ -21,7 +21,19 @@ module Todo
     end
 
     def match_with_verb_and_path(context_verb : String, context_path : String)
-      ((@verb == context_verb)&&(@path == context_path))
+      ((@verb == context_verb) && (@path == context_path))
+    end
+  end
+
+  class TableRoute
+    property list_route : Array(Route)
+
+    def initialize
+      @list_route = Array(Route).new
+    end
+
+    def match_with_a_route?(context_verb : String, context_path : String)
+      @list_route.select! { |route| route.match_with_verb_and_path(context_verb, context_path) }
     end
   end
 
