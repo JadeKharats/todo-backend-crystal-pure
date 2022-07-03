@@ -21,7 +21,24 @@ module Todo
     end
 
     def match_with_verb_and_path(context_verb : String, context_path : String)
-      ((@verb == context_verb) && (@path == context_path))
+      (match_verb?(context_verb) && match_path?(context_path))
+    end
+
+    def match_verb?(context_verb)
+      @verb == context_verb
+    end
+
+    def match_path?(context_path)
+      if @path.includes? ":"
+        match_path_regex?(context_path)
+      else
+        @path == context_path
+      end
+    end
+
+    def match_path_regex?(context_path)
+      regex_path = @path.split("/").map { |element| element.starts_with?(":") ? "(.)+" : element }.join("/")
+      Regex.new(regex_path).match(context_path).is_a? Regex::MatchData
     end
   end
 

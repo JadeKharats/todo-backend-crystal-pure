@@ -29,5 +29,12 @@ describe Todo::Route do
       route = Todo::Route.new("GET", "/right")
       route.match_with_verb_and_path(verb, path).should eq false
     end
+
+    it "with params into path" do
+      path = "/right/aadgf-gege-geqge-gfeg"
+      verb = "GET"
+      route = Todo::Route.new("GET", "/right/:id")
+      route.match_with_verb_and_path(verb, path).should eq true
+    end
   end
 end
