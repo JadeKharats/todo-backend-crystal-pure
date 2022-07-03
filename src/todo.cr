@@ -16,6 +16,15 @@ module Todo
     end
   end
 
+  class Route
+    def initialize(@verb : String, @path : String)
+    end
+
+    def match_with_verb_and_path(context_verb : String, context_path : String)
+      ((@verb == context_verb)&&(@path == context_path))
+    end
+  end
+
   class Repository
     def initialize
       @todo_list = Hash(String, Item).new
